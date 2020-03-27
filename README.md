@@ -106,12 +106,17 @@ You're set to go.
 There is a blade extension for you to use **@sortablelink()**
 
 ```blade
-@sortablelink('column', 'Title', ['parameter' => 'smile'],  ['rel' => 'nofollow'])
+@sortablelink('column', 'Title', ['parameter' => 'smile'],  ['rel' => 'nofollow'], '/url')
 ```
 
-**Column** (1st) parameter is column in database, **Title** (2nd) parameter is displayed inside anchor tags, `array()` parameter (3rd) is default (GET) query strings parameter and `array()` parameter (4th) is for additional anchor-tag attributes.  
+**Column** (1st) parameter is column in database,  
+**Title** (2nd) parameter is displayed inside anchor tags,  
+parameter (3rd) `array()` is default (GET) query strings parameter  
+parameter (4th) `array()` is for additional anchor-tag attributes.  
+parameter (5th) `string`  is URL to overide default one. Useful in ajax calls.
 
-You can omit 2nd, 3rd and 4th parameter.
+
+You can omit 2nd, 3rd, 4th and 5th parameter.
 
 Possible examples and usages of blade extension:
 
@@ -120,6 +125,7 @@ Possible examples and usages of blade extension:
 @sortablelink('name', 'Username')
 @sortablelink('address', trans('fields.address'), ['filter' => 'active, visible'])
 @sortablelink('address', trans('fields.address'), ['filter' => 'active, visible'], ['class' => 'btn btn-block', 'rel' => 'nofollow'])
+@sortablelink('address', trans('fields.address'), ['filter' => 'active, visible'], ['class' => 'btn btn-block', 'rel' => 'nofollow'], '/orders')
 ```
 
 If you do not fill **Title** (2nd parameter) column name is used instead.
