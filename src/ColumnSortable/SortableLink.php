@@ -21,7 +21,7 @@ class SortableLink
      */
     public static function render(array $parameters)
     {
-        list($sortColumn, $sortParameter, $title, $queryParameters, $anchorAttributes) = self::parseParameters($parameters);
+        list($sortColumn, $sortParameter, $title, $queryParameters, $anchorAttributes, $requestUrl) = self::parseParameters($parameters);
 
         $title = self::applyFormatting($title, $sortColumn);
 
@@ -39,7 +39,7 @@ class SortableLink
 
         $queryString = self::buildQueryString($queryParameters, $sortParameter, $direction);
 
-        return '<a'.$anchorClass.' href="'.url(request()->path().'?'.$queryString).'"'.$anchorAttributesString.'>'.e($title).$trailingTag;
+        return '<a'.$anchorClass.' href="'.url($requestUrl.'?'.$queryString).'"'.$anchorAttributesString.'>'.e($title).$trailingTag;
     }
 
 
@@ -58,8 +58,9 @@ class SortableLink
         $title            = (count($parameters) === 1) ? null : $parameters[1];
         $queryParameters  = (isset($parameters[2]) && is_array($parameters[2])) ? $parameters[2] : [];
         $anchorAttributes = (isset($parameters[3]) && is_array($parameters[3])) ? $parameters[3] : [];
+        $requestUrl = isset($parameters[4]) ? $parameters[4] : request()->path();
 
-        return [$sortColumn, $parameters[0], $title, $queryParameters, $anchorAttributes];
+        return [$sortColumn, $parameters[0], $title, $queryParameters, $anchorAttributes, $requestUrl];
     }
 
 
